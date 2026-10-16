@@ -1,5 +1,7 @@
 # 🕵️ Sherlock Rx
 
+[![ci](https://github.com/akshitsubudhi/sherlock-rx/actions/workflows/ci.yml/badge.svg)](https://github.com/akshitsubudhi/sherlock-rx/actions/workflows/ci.yml)
+
 **A conversational NLP assistant that finds *why* a pharma brand is under-performing in a region, and shows its evidence.**
 
 > *Brand Root Cause Analysis: a conversational AI solution to perform root cause analysis for
@@ -198,7 +200,7 @@ in-memory store for Redis), and the API is stateless.
 ## Quick start
 
 ```bash
-git clone <this repo> && cd sherlock-rx
+git clone https://github.com/akshitsubudhi/sherlock-rx.git && cd sherlock-rx
 make setup        # venv + deps, generate data (0.2 s), train NLU (~90 s)
 make chat         # terminal chat with the NLU trace
 make ui           # Streamlit app: chat + "under the hood" panel + charts
