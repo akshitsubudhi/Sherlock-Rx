@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/akshitsubudhi/Sherlock-Rx/actions/workflows/ci.yml/badge.svg)](https://github.com/akshitsubudhi/Sherlock-Rx/actions/workflows/ci.yml)
 
-**A conversational NLP assistant that finds *why* a pharma brand is under-performing in a region, and shows its evidence.**
+**A conversational NLP assistant that finds *why* a brand is under-performing in a region, and shows its evidence.**
 
 > *Brand Root Cause Analysis: a conversational AI solution to perform root cause analysis for
 > under-performing brands by region (Healthcare).*
