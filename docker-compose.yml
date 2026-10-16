@@ -1,0 +1,18 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      - SHERLOCK_DUCKDB_THREADS=2
+      # - SHERLOCK_LLM_FALLBACK=1
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 10s
+  ui:
+    build: .
+    command: ["streamlit", "run", "src/sherlock_rx/ui/app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+    ports: ["8501:8501"]
+    environment:
+      - SHERLOCK_API_URL=http://api:8000
+    depends_on: [api]

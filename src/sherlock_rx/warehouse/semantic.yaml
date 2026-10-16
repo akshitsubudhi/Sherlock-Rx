@@ -1,0 +1,88 @@
+# Semantic layer: the only vocabulary the chatbot can query with.
+# A metric names its source table, aggregate expression and grain; the compiler joins the
+# dimension tables it needs and refuses group-bys finer than the table's grain (e.g. the
+# market audit is state-level, so "market share by territory" is rejected, not invented).
+
+dimensions:
+  region:    {table: dim_geo,   column: region,      key: territory_id, level: geo}
+  state:     {table: dim_geo,   column: state,       key: territory_id, level: geo}
+  territory: {table: dim_geo,   column: territory,   key: territory_id, level: geo}
+  brand:     {table: dim_brand, column: brand,       key: brand_id}
+  therapy:   {table: dim_brand, column: therapy,     key: brand_id}
+  sku:       {table: dim_sku,   column: sku,         key: sku_id}
+  month:     {table: dim_month, column: month,       key: month}
+  quarter:   {table: dim_month, column: quarter,     key: month}
+
+metrics:
+  net_sales:
+    label: Net secondary sales
+    table: agg_sales_tbm
+    expr: sum(f.net_value)
+    unit: inr
+    grain: [territory, sku, month]
+  gross_sales:
+    label: Gross secondary sales
+    table: agg_sales_tbm
+    expr: sum(f.gross_value)
+    unit: inr
+    grain: [territory, sku, month]
+  units:
+    label: Units sold
+    table: agg_sales_tbm
+    expr: sum(f.units)
+    unit: count
+    grain: [territory, sku, month]
+  target:
+    label: Sales target
+    table: fact_targets
+    expr: sum(f.target_value)
+    unit: inr
+    grain: [territory, month]
+  calls:
+    label: Doctor calls
+    table: fact_field
+    expr: sum(f.calls)
+    unit: count
+    grain: [territory, month]
+  reps_active:
+    label: Active medical reps (avg per month)
+    table: fact_field
+    expr: sum(f.reps_active) / count(DISTINCT f.month)
+    unit: count
+    grain: [territory, month]
+  vacancy_rate:
+    label: Field-force vacancy rate
+    table: fact_field
+    expr: 1 - sum(f.reps_active) / sum(f.reps_sanctioned)
+    unit: pct
+    grain: [territory, month]
+  prescriptions:
+    label: Prescriptions
+    table: fact_rx
+    expr: sum(f.prescriptions)
+    unit: count
+    grain: [territory, month]
+  stockout_days:
+    label: Avg stock-out days per SKU-territory-month
+    table: fact_inventory
+    expr: avg(f.stockout_days)
+    unit: days
+    grain: [territory, sku, month]
+  active_retailers:
+    label: Active retailers (avg per month)
+    table: fact_distribution
+    expr: sum(f.active_retailers) / count(DISTINCT f.month)
+    unit: count
+    grain: [territory, month]
+  market_units:
+    label: Molecule market (units)
+    table: fact_market
+    expr: sum(f.units)
+    unit: count
+    grain: [state, month]
+  market_share:
+    label: Volume market share
+    table: fact_market
+    expr: sum(CASE WHEN f.is_ours THEN f.units ELSE 0 END) / sum(f.units)
+    unit: pct
+    grain: [state, month]

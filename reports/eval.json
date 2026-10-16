@@ -1,0 +1,860 @@
+{
+  "generated_at": "2026-10-17 04:17:37",
+  "rca": {
+    "seeds": [
+      7,
+      11,
+      23,
+      42,
+      101
+    ],
+    "severity_scale": 1.0,
+    "noise_scale": 1.0,
+    "scenarios": 160,
+    "cause_at_1": 0.9875,
+    "cause_at_2": 0.9875,
+    "location_acc": 1.0,
+    "flagged_rate": 1.0,
+    "false_alarm_rate": 0.0,
+    "median_latency_ms": 67.8,
+    "per_cause_acc": {
+      "competitor_launch": 0.967,
+      "distribution_loss": 0.967,
+      "field_force_vacancy": 1.0,
+      "market_slowdown": 1.0,
+      "price_cut": 1.0,
+      "stockout": 1.0
+    },
+    "misses": [
+      {
+        "scenario": "S14",
+        "truth": "competitor_launch",
+        "pred": "market_slowdown",
+        "brand": "Gastrazole",
+        "region": "Central",
+        "quarter": "Q3 FY26",
+        "severity": 0.29,
+        "causes": [
+          [
+            "market_slowdown",
+            -0.021
+          ],
+          [
+            "competitor_launch",
+            -0.014
+          ],
+          [
+            "field_force_vacancy",
+            -0.003
+          ]
+        ]
+      },
+      {
+        "scenario": "S18",
+        "truth": "distribution_loss",
+        "pred": "none",
+        "brand": "Glucoryl",
+        "region": "East",
+        "quarter": "Q3 FY26",
+        "severity": 0.41,
+        "causes": [
+          [
+            "distribution_loss",
+            -0.012
+          ]
+        ]
+      }
+    ]
+  },
+  "rca_sweep": [
+    {
+      "severity_scale": 0.7,
+      "noise_scale": 1.0,
+      "scenarios": 96,
+      "cause_at_1": 1.0,
+      "location_acc": 1.0,
+      "flagged_rate": 1.0,
+      "false_alarm_rate": 0.0
+    },
+    {
+      "severity_scale": 0.5,
+      "noise_scale": 1.0,
+      "scenarios": 96,
+      "cause_at_1": 0.9583333333333334,
+      "location_acc": 1.0,
+      "flagged_rate": 1.0,
+      "false_alarm_rate": 0.0
+    },
+    {
+      "severity_scale": 0.35,
+      "noise_scale": 1.0,
+      "scenarios": 96,
+      "cause_at_1": 0.8854166666666666,
+      "location_acc": 1.0,
+      "flagged_rate": 0.96875,
+      "false_alarm_rate": 0.0
+    },
+    {
+      "severity_scale": 1.0,
+      "noise_scale": 2.0,
+      "scenarios": 96,
+      "cause_at_1": 0.9791666666666666,
+      "location_acc": 1.0,
+      "flagged_rate": 0.9895833333333334,
+      "false_alarm_rate": 0.016666666666666666
+    },
+    {
+      "severity_scale": 0.5,
+      "noise_scale": 2.0,
+      "scenarios": 96,
+      "cause_at_1": 0.90625,
+      "location_acc": 1.0,
+      "flagged_rate": 0.9791666666666666,
+      "false_alarm_rate": 0.016666666666666666
+    }
+  ],
+  "nlu": {
+    "nlu_handwritten.yaml": {
+      "n": 132,
+      "intent_accuracy": 0.9772727272727273,
+      "intent_macro_f1": 0.9822775803978813,
+      "slot_accuracy": 1.0,
+      "p50_ms": 0.63,
+      "keyword_baseline_accuracy": 0.5984848484848485,
+      "failures": [
+        {
+          "text": "cardivex north q2 - whats going on",
+          "expected": "diagnose",
+          "got": "metric_lookup",
+          "slots_ok": "3/3",
+          "got_slots": {
+            "brands": [
+              "Cardivex"
+            ],
+            "regions": [
+              "North"
+            ],
+            "period": "Q2 FY27"
+          }
+        },
+        {
+          "text": "month on month sales of neurovita for the last 6 months",
+          "expected": "trend",
+          "got": "metric_lookup",
+          "slots_ok": "3/3",
+          "got_slots": {
+            "dimension": "month",
+            "metrics": [
+              "net_sales"
+            ],
+            "brands": [
+              "Neurovita"
+            ],
+            "period": "Last 6 months (Apr-Sep 2026)"
+          }
+        },
+        {
+          "text": "what's 15% of 2400",
+          "expected": "out_of_scope",
+          "got": "define_term",
+          "slots_ok": "0/0",
+          "got_slots": {}
+        }
+      ]
+    },
+    "nlu_handwritten_v2.yaml": {
+      "n": 76,
+      "intent_accuracy": 0.9342105263157895,
+      "intent_macro_f1": 0.939529156144063,
+      "slot_accuracy": 1.0,
+      "p50_ms": 0.59,
+      "keyword_baseline_accuracy": 0.6052631578947368,
+      "failures": [
+        {
+          "text": "Cardivex numbers in Punjab look terrible this quarter, what's the story?",
+          "expected": "diagnose",
+          "got": "metric_lookup",
+          "slots_ok": "3/3",
+          "got_slots": {
+            "brands": [
+              "Cardivex"
+            ],
+            "metrics": [
+              "net_sales",
+              "stockout_days"
+            ],
+            "states": [
+              "Punjab"
+            ],
+            "period": "Q2 FY27",
+            "regions": [
+              "North"
+            ]
+          }
+        },
+        {
+          "text": "any problem brands in central?",
+          "expected": "find_underperformers",
+          "got": "drill_down",
+          "slots_ok": "1/1",
+          "got_slots": {
+            "dimension": "brand",
+            "regions": [
+              "Central"
+            ]
+          }
+        },
+        {
+          "text": "which region is hurting glucoryl the most",
+          "expected": "find_underperformers",
+          "got": "drill_down",
+          "slots_ok": "1/1",
+          "got_slots": {
+            "brands": [
+              "Glucoryl"
+            ]
+          }
+        },
+        {
+          "text": "what's the share price of a pharma company",
+          "expected": "out_of_scope",
+          "got": "define_term",
+          "slots_ok": "0/0",
+          "got_slots": {
+            "metrics": [
+              "market_share"
+            ]
+          }
+        },
+        {
+          "text": "how many holidays do I have left",
+          "expected": "out_of_scope",
+          "got": "help",
+          "slots_ok": "0/0",
+          "got_slots": {}
+        }
+      ]
+    }
+  },
+  "nlu_training": {
+    "meta": {
+      "trained_at": "2026-10-17 04:14:37",
+      "seed": 13,
+      "corpus_hash": "b52bb1ff543f",
+      "corpus_sizes": {
+        "train": 4515,
+        "val": 1157,
+        "test": 1184
+      },
+      "intents": [
+        "compare",
+        "define_term",
+        "diagnose",
+        "drill_down",
+        "find_underperformers",
+        "goodbye",
+        "greet",
+        "help",
+        "metric_lookup",
+        "out_of_scope",
+        "recommend",
+        "search_notes",
+        "thanks",
+        "trend"
+      ],
+      "entity_tags": [
+        "B-BASELINE",
+        "B-BRAND",
+        "B-COMPETITOR",
+        "B-DIM",
+        "B-METRIC",
+        "B-REGION",
+        "B-SKU",
+        "B-STATE",
+        "B-TERRITORY",
+        "B-THERAPY",
+        "B-TIME",
+        "I-BASELINE",
+        "I-BRAND",
+        "I-COMPETITOR",
+        "I-DIM",
+        "I-METRIC",
+        "I-REGION",
+        "I-SKU",
+        "I-STATE",
+        "I-TERRITORY",
+        "I-THERAPY",
+        "I-TIME",
+        "O"
+      ],
+      "selected_intent_model": "tfidf_logreg",
+      "confidence_threshold": 0.3,
+      "tagger_features": 3312,
+      "train_seconds": 73.9
+    },
+    "intent": {
+      "keyword_rules": {
+        "val": {
+          "accuracy": 0.3915298184961106,
+          "macro_f1": 0.3222272192252941,
+          "ece": 0.6084701815038893
+        },
+        "test": {
+          "accuracy": 0.46030405405405406,
+          "macro_f1": 0.45186836030899774,
+          "ece": 0.5396959459459459
+        },
+        "fit_seconds": 0.0
+      },
+      "naive_bayes": {
+        "val": {
+          "accuracy": 0.7121866897147796,
+          "macro_f1": 0.6581881584389973,
+          "ece": 0.26860978187274964
+        },
+        "test": {
+          "accuracy": 0.660472972972973,
+          "macro_f1": 0.6571818659313138,
+          "ece": 0.3156412092934677
+        },
+        "fit_seconds": 0.36
+      },
+      "tfidf_logreg": {
+        "val": {
+          "accuracy": 0.6974935177182369,
+          "macro_f1": 0.6362046335399646,
+          "ece": 0.083424687209444
+        },
+        "test": {
+          "accuracy": 0.6410472972972973,
+          "macro_f1": 0.6100859957959927,
+          "ece": 0.06971260649611
+        },
+        "fit_seconds": 0.97
+      },
+      "tfidf_linear_svm": {
+        "val": {
+          "accuracy": 0.6940363007778738,
+          "macro_f1": 0.6284315778503379,
+          "ece": 0.14580379918595526
+        },
+        "test": {
+          "accuracy": 0.6646959459459459,
+          "macro_f1": 0.6335018951361508,
+          "ece": 0.14528499889880292
+        },
+        "fit_seconds": 0.86
+      },
+      "tfidf_logreg_no_masking": {
+        "test": {
+          "accuracy": 0.6055743243243243,
+          "macro_f1": 0.5879775307725081
+        }
+      }
+    },
+    "ner": {
+      "gazetteer_only": {
+        "BASELINE": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "BRAND": {
+          "precision": 1.0,
+          "recall": 0.9287020109689214,
+          "f1": 0.9630331753554503,
+          "support": 547.0
+        },
+        "DIM": {
+          "precision": 0.9343629343629344,
+          "recall": 1.0,
+          "f1": 0.9660678642714572,
+          "support": 242.0
+        },
+        "METRIC": {
+          "precision": 0.8405063291139241,
+          "recall": 0.996996996996997,
+          "f1": 0.9120879120879121,
+          "support": 333.0
+        },
+        "REGION": {
+          "precision": 0.9883720930232558,
+          "recall": 1.0,
+          "f1": 0.9941520467836257,
+          "support": 255.0
+        },
+        "STATE": {
+          "precision": 1.0,
+          "recall": 0.9821428571428571,
+          "f1": 0.9909909909909909,
+          "support": 168.0
+        },
+        "TERRITORY": {
+          "precision": 0.5573770491803278,
+          "recall": 1.0,
+          "f1": 0.7157894736842105,
+          "support": 34.0
+        },
+        "THERAPY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0.0
+        },
+        "TIME": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 188.0
+        },
+        "micro": {
+          "precision": 0.9248346361996392,
+          "recall": 0.8694177501413228,
+          "f1": 0.8962703962703963,
+          "support": 1769.0
+        }
+      },
+      "perceptron_no_gazetteer": {
+        "BASELINE": {
+          "precision": 0.15384615384615385,
+          "recall": 1.0,
+          "f1": 0.2666666666666667,
+          "support": 2.0
+        },
+        "BRAND": {
+          "precision": 0.9628318584070796,
+          "recall": 0.9945155393053017,
+          "f1": 0.9784172661870504,
+          "support": 547.0
+        },
+        "COMPETITOR": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0.0
+        },
+        "DIM": {
+          "precision": 0.7682926829268293,
+          "recall": 0.78099173553719,
+          "f1": 0.7745901639344263,
+          "support": 242.0
+        },
+        "METRIC": {
+          "precision": 0.7941176470588235,
+          "recall": 0.972972972972973,
+          "f1": 0.874493927125506,
+          "support": 333.0
+        },
+        "REGION": {
+          "precision": 0.9844357976653697,
+          "recall": 0.9921568627450981,
+          "f1": 0.98828125,
+          "support": 255.0
+        },
+        "STATE": {
+          "precision": 0.9222222222222223,
+          "recall": 0.9880952380952381,
+          "f1": 0.9540229885057472,
+          "support": 168.0
+        },
+        "TERRITORY": {
+          "precision": 0.8666666666666667,
+          "recall": 0.7647058823529411,
+          "f1": 0.8125,
+          "support": 34.0
+        },
+        "THERAPY": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0.0
+        },
+        "TIME": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 188.0
+        },
+        "micro": {
+          "precision": 0.8942917547568711,
+          "recall": 0.9564725833804409,
+          "f1": 0.9243376126741328,
+          "support": 1769.0
+        }
+      },
+      "perceptron_with_gazetteer": {
+        "BASELINE": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "BRAND": {
+          "precision": 0.9873417721518988,
+          "recall": 0.9981718464351006,
+          "f1": 0.9927272727272728,
+          "support": 547.0
+        },
+        "DIM": {
+          "precision": 0.9343629343629344,
+          "recall": 1.0,
+          "f1": 0.9660678642714572,
+          "support": 242.0
+        },
+        "METRIC": {
+          "precision": 0.8405063291139241,
+          "recall": 0.996996996996997,
+          "f1": 0.9120879120879121,
+          "support": 333.0
+        },
+        "REGION": {
+          "precision": 0.9883720930232558,
+          "recall": 1.0,
+          "f1": 0.9941520467836257,
+          "support": 255.0
+        },
+        "STATE": {
+          "precision": 0.9940476190476191,
+          "recall": 0.9940476190476191,
+          "f1": 0.9940476190476191,
+          "support": 168.0
+        },
+        "TERRITORY": {
+          "precision": 0.5573770491803278,
+          "recall": 1.0,
+          "f1": 0.7157894736842105,
+          "support": 34.0
+        },
+        "TIME": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 188.0
+        },
+        "micro": {
+          "precision": 0.9373673036093418,
+          "recall": 0.998304126625212,
+          "f1": 0.9668765398302763,
+          "support": 1769.0
+        }
+      }
+    },
+    "handwritten": {
+      "n": 132,
+      "intent_accuracy": 0.9772727272727273,
+      "intent_macro_f1": 0.9822775803978813,
+      "slot_accuracy": 1.0,
+      "per_slot_accuracy": {
+        "baseline": 1.0,
+        "brands": 1.0,
+        "competitors": 1.0,
+        "dimension": 1.0,
+        "metrics": 1.0,
+        "period": 1.0,
+        "regions": 1.0,
+        "skus": 1.0,
+        "states": 1.0,
+        "territories": 1.0,
+        "therapies": 1.0
+      },
+      "confusion": {
+        "labels": [
+          "compare",
+          "define_term",
+          "diagnose",
+          "drill_down",
+          "find_underperformers",
+          "goodbye",
+          "greet",
+          "help",
+          "metric_lookup",
+          "out_of_scope",
+          "recommend",
+          "search_notes",
+          "thanks",
+          "trend"
+        ],
+        "matrix": [
+          [
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            19,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            7
+          ]
+        ]
+      },
+      "failures": [
+        {
+          "text": "cardivex north q2 - whats going on",
+          "expected": "diagnose",
+          "got": "metric_lookup",
+          "confidence": 0.75,
+          "slots_ok": "3/3",
+          "slots": {
+            "brands": [
+              "Cardivex"
+            ],
+            "regions": [
+              "North"
+            ],
+            "period": "Q2 FY27"
+          }
+        },
+        {
+          "text": "month on month sales of neurovita for the last 6 months",
+          "expected": "trend",
+          "got": "metric_lookup",
+          "confidence": 0.51,
+          "slots_ok": "3/3",
+          "slots": {
+            "dimension": "month",
+            "metrics": [
+              "net_sales"
+            ],
+            "brands": [
+              "Neurovita"
+            ],
+            "period": "Last 6 months (Apr-Sep 2026)"
+          }
+        },
+        {
+          "text": "what's 15% of 2400",
+          "expected": "out_of_scope",
+          "got": "define_term",
+          "confidence": 0.65,
+          "slots_ok": "0/0",
+          "slots": {}
+        }
+      ],
+      "keyword_baseline_accuracy": 0.5984848484848485
+    }
+  },
+  "dialogue": {
+    "conversations": 13,
+    "success_rate": 1.0,
+    "turns": 31,
+    "turn_accuracy": 1.0,
+    "p50_turn_ms": 11.1,
+    "p95_turn_ms": 81.3,
+    "failures": []
+  }
+}

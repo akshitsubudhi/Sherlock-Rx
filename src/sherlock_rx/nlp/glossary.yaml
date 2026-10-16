@@ -1,0 +1,100 @@
+# Domain glossary used by the define_term intent (BM25 over term + aliases + definition).
+- term: Secondary sales
+  aliases: [secondaries, secondary, sell-in to retail]
+  definition: Sales from stockists (distributors) to retailers and hospitals. It is the main performance measure for Indian pharma field teams because it reflects real offtake better than primary sales.
+- term: Primary sales
+  aliases: [primaries, primary]
+  definition: Sales from the company (via its C&F agents) to stockists. Primary can be pushed by channel loading, so it can run ahead of secondary sales.
+- term: Primary vs secondary sales
+  aliases: [difference between primary and secondary sales]
+  definition: Primary is company to stockist; secondary is stockist to retailer. A gap between the two means inventory is building up (or being drained) in the channel.
+- term: PTR (Price to Retailer)
+  aliases: [ptr, price to retailer]
+  definition: The price at which the retailer buys from the stockist. Secondary sales value in this warehouse is computed at PTR less trade discounts.
+- term: PTS (Price to Stockist)
+  aliases: [pts, price to stockist]
+  definition: The price at which the stockist buys from the company; PTR minus the stockist margin.
+- term: MRP
+  aliases: [maximum retail price, mrp]
+  definition: The maximum retail price printed on the pack, the price the patient pays at most.
+- term: DPCO
+  aliases: [drug price control order, dpco]
+  definition: The Drug (Prices Control) Order, under which the government fixes ceiling prices for scheduled formulations. A DPCO price revision lowers value while volumes usually stay steady.
+- term: NPPA
+  aliases: [national pharmaceutical pricing authority, nppa, ceiling price]
+  definition: The National Pharmaceutical Pricing Authority, which notifies ceiling prices under DPCO. A ceiling price notification shows up in the bridge as a negative price effect.
+- term: NLEM
+  aliases: [national list of essential medicines, nlem]
+  definition: The National List of Essential Medicines. Formulations on NLEM are scheduled and become subject to price control.
+- term: Market share
+  aliases: [share, volume share, ms]
+  definition: Our units divided by total units of the molecule market in the market audit, at state level. Sherlock uses volume share so that price changes do not distort it.
+- term: Rx share
+  aliases: [prescription share, rx share, prescription]
+  definition: Our share of prescriptions written for the molecule. Prescriptions falling together with sales points to demand-side causes (coverage, competition); prescriptions holding while sales fall points to supply or distribution.
+- term: Call average
+  aliases: [calls, call average, doctor calls, coverage]
+  definition: Doctor visits made by a medical representative, usually tracked per working day. A sharp fall in calls normally means a vacant territory.
+- term: Target achievement
+  aliases: [achievement, achievement percentage, ach]
+  definition: Actual secondary sales divided by target, for the same territory, brand and period. Sherlock flags a brand-region as under-performing below 95% achievement or when it grows 4 points slower than the rest of India.
+- term: Medical Representative (MR)
+  aliases: [mr, medical rep, rep, pso]
+  definition: The field employee who details brands to doctors in a territory (also called PSO or TBM in some companies).
+- term: Area Business Manager (ABM)
+  aliases: [abm, area manager, first line manager]
+  definition: The first-line manager of a team of MRs, responsible for an area of several territories.
+- term: Regional Business Manager (RBM)
+  aliases: [rbm, regional manager, zonal manager]
+  definition: The manager responsible for a region or zone, reviewing ABMs and state performance.
+- term: HQ / territory
+  aliases: [hq, headquarter, territory, town]
+  definition: The town an MR is based in and the geography they cover. It is the lowest level of the sales hierarchy (territory, state, region).
+- term: C&F agent
+  aliases: [c&f, carrying and forwarding, depot]
+  definition: The carrying and forwarding agent that stores the company's stock in a state and dispatches to stockists. A C&F stock-out cuts supply to every stockist in the state.
+- term: Stockist
+  aliases: [distributor, stockist, super stockist]
+  definition: The distributor that buys from the company and supplies retailers. Losing a stockist cuts retail reach in its towns.
+- term: Stock-out
+  aliases: [stockout, out of stock, oos, stock-out days, availability]
+  definition: A period when a SKU is not available at the stockist or retailer. Sherlock measures stock-out days per SKU, territory and month; stock-outs reduce sales but not prescriptions.
+- term: Days of cover
+  aliases: [inventory days, days of cover]
+  definition: How many days of sales the current inventory would last. Low days of cover precede stock-outs.
+- term: Trade scheme
+  aliases: [scheme, bonus deal, trade discount]
+  definition: Extra discounts or free goods offered to stockists and retailers, often used by competitors to win shelf share.
+- term: CME
+  aliases: [continuing medical education, cme]
+  definition: Continuing Medical Education sessions for doctors, a common promotional activity.
+- term: Detailing
+  aliases: [detailing, brand detailing]
+  definition: An MR presenting a brand's clinical benefits to a doctor during a call.
+- term: YoY growth
+  aliases: [yoy, year on year, growth]
+  definition: The change versus the same months of the previous year. It removes seasonality, which is why every RCA comparison in Sherlock is year on year.
+- term: Bridge (gap waterfall)
+  aliases: [bridge, waterfall, bridge chart, gap bridge]
+  definition: The waterfall from last year's sales to this period's sales, split into market growth, share change and price effect. The pieces add up exactly to the actual change.
+- term: Price-volume-mix
+  aliases: [pvm, price volume mix, price effect, volume effect]
+  definition: A decomposition of the sales change into price changes (at constant units) and volume changes (at last year's prices), computed SKU by SKU so mix shifts are not mistaken for price.
+- term: Market effect
+  aliases: [market effect, market growth effect]
+  definition: The part of the sales change explained by the molecule market growing or shrinking, holding our share constant (last year's sales times market growth).
+- term: Share effect
+  aliases: [share effect, share change effect]
+  definition: The part of the sales change explained by gaining or losing market share at constant prices. Sherlock attributes it to vacancies, stock-outs, distribution loss and competitors.
+- term: Difference-in-differences
+  aliases: [did, diff in diff, difference in differences, control territories]
+  definition: Comparing the change in affected territories with the change in unaffected ones over the same period. Sherlock uses it to estimate how much a vacancy, stock-out or distribution loss cost.
+- term: New entrant
+  aliases: [new entrant, competitor launch, new competitor]
+  definition: A competitor brand with no share last year that has taken share this year. Sherlock detects it as a competitor gaining far more share than proportional redistribution would give it.
+- term: Confidence score
+  aliases: [confidence, confidence score]
+  definition: How strongly the evidence supports a cause, from 0 to 1. It rises when the cause's signature is consistent (e.g. a stock-out with stable prescriptions) and when many territories show it.
+- term: Molecule market
+  aliases: [market, category, molecule]
+  definition: All brands of the same molecule combination sold in a state, from the market audit; the denominator for market share.
