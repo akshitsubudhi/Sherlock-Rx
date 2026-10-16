@@ -1,0 +1,78 @@
+# Hand-written NLU test set v2. Written AFTER the NLU was frozen and evaluated exactly
+# once (see docs/EVALUATION.md); it was never used to change templates or models.
+- {text: "Cardivex numbers in Punjab look terrible this quarter, what's the story?", intent: diagnose, slots: {brands: [Cardivex], states: [Punjab], period: Q2 FY27}}
+- {text: "need an RCA: Gastrazole, West zone, Q1", intent: diagnose, slots: {brands: [Gastrazole], regions: [West], period: Q1 FY27}}
+- {text: "why has respiron gone soft in assam", intent: diagnose, slots: {brands: [Respiron], states: [Assam]}}
+- {text: "painex down 10% in haryana - reason?", intent: diagnose, slots: {brands: [Painex], states: [Haryana]}}
+- {text: "What's dragging Neurovita in the East since June?", intent: diagnose, slots: {brands: [Neurovita], regions: [East], period: Since Jun 2026}}
+- {text: "explain why cefobact missed plan in telangana", intent: diagnose, slots: {brands: [Cefobact], states: [Telangana]}}
+- {text: "Dermaclear south decline root cause pls", intent: diagnose, slots: {brands: [Dermaclear], regions: [South]}}
+- {text: "how come glucoryl is lagging in MP", intent: diagnose, slots: {brands: [Glucoryl], states: [Madhya Pradesh]}}
+- {text: "why is cardivex so bad in jharkhand in fy26", intent: diagnose, slots: {brands: [Cardivex], states: [Jharkhand], period: FY26}}
+- {text: "Respiron Central mein itna kam kyun hai", intent: diagnose, slots: {brands: [Respiron], regions: [Central]}}
+- {text: "what caused this?", intent: diagnose, slots: {}}
+- {text: "so why is that", intent: diagnose, slots: {}}
+- {text: "which of our brands are struggling in the west?", intent: find_underperformers, slots: {regions: [West]}}
+- {text: "where are we behind target in Q1 FY27", intent: find_underperformers, slots: {period: Q1 FY27}}
+- {text: "show weak brand regions", intent: find_underperformers, slots: {}}
+- {text: "any problem brands in central?", intent: find_underperformers, slots: {regions: [Central]}}
+- {text: "which region is hurting glucoryl the most", intent: find_underperformers, slots: {brands: [Glucoryl]}}
+- {text: "flag laggards for last quarter", intent: find_underperformers, slots: {period: Q2 FY27}}
+- {text: "which respiratory brands are below target", intent: find_underperformers, slots: {therapies: [Respiratory]}}
+- {text: "top 5 underperformers", intent: find_underperformers, slots: {}}
+- {text: "Neurovita sales in Gujarat for Q1 FY27?", intent: metric_lookup, slots: {brands: [Neurovita], states: [Gujarat], metrics: [net_sales], period: Q1 FY27}}
+- {text: "what's the target for cardivex in west this quarter", intent: metric_lookup, slots: {brands: [Cardivex], regions: [West], metrics: [target], period: Q2 FY27}}
+- {text: "glucoryl prescriptions in maharashtra", intent: metric_lookup, slots: {brands: [Glucoryl], states: [Maharashtra], metrics: [prescriptions]}}
+- {text: "market share of painex in TN last month", intent: metric_lookup, slots: {brands: [Painex], states: [Tamil Nadu], metrics: [market_share], period: Sep 2026}}
+- {text: "how many units of Respiron Syrup in east in august", intent: metric_lookup, slots: {skus: [Respiron Syrup], regions: [East], metrics: [units], period: Aug 2026}}
+- {text: "cefobact achievement in south ytd", intent: metric_lookup, slots: {brands: [Cefobact], regions: [South], metrics: [achievement], period: FY27 (YTD)}}
+- {text: "doctor calls for dermaclear in kerala", intent: metric_lookup, slots: {brands: [Dermaclear], states: [Kerala], metrics: [calls]}}
+- {text: "what's gastrazole doing in hyderabad", intent: metric_lookup, slots: {brands: [Gastrazole], territories: [Hyderabad]}}
+- {text: "stock out days for glucoryl M2 in bihar", intent: metric_lookup, slots: {skus: [Glucoryl M2], states: [Bihar], metrics: [stockout_days]}}
+- {text: "Neurovita ka West Bengal mein business kitna hai", intent: metric_lookup, slots: {brands: [Neurovita], states: [West Bengal]}}
+- {text: "compare cardivex in delhi vs haryana", intent: compare, slots: {brands: [Cardivex], states: [Delhi, Haryana]}}
+- {text: "painex: north versus west, Q1 FY27", intent: compare, slots: {brands: [Painex], regions: [North, West], period: Q1 FY27}}
+- {text: "how do the regions compare on respiron", intent: compare, slots: {brands: [Respiron]}}
+- {text: "glucoryl region-wise comparison", intent: compare, slots: {brands: [Glucoryl], dimension: region}}
+- {text: "is gastrazole stronger in kerala or karnataka", intent: compare, slots: {brands: [Gastrazole], states: [Kerala, Karnataka]}}
+- {text: "benchmark east against the other zones for neurovita", intent: compare, slots: {brands: [Neurovita], regions: [East]}}
+- {text: "split it by state", intent: drill_down, slots: {dimension: state}}
+- {text: "which HQs are the worst", intent: drill_down, slots: {}}
+- {text: "drill into gujarat", intent: drill_down, slots: {states: [Gujarat]}}
+- {text: "territory wise view for cardivex in UP", intent: drill_down, slots: {brands: [Cardivex], states: [Uttar Pradesh], dimension: territory}}
+- {text: "where in the south is the shortfall", intent: drill_down, slots: {regions: [South]}}
+- {text: "sku wise split for painex", intent: drill_down, slots: {brands: [Painex], dimension: sku}}
+- {text: "plot glucoryl monthly in the south", intent: trend, slots: {brands: [Glucoryl], regions: [South], dimension: month}}
+- {text: "has cardivex been declining over the last 6 months?", intent: trend, slots: {brands: [Cardivex]}}
+- {text: "respiron sales trend in kerala", intent: trend, slots: {brands: [Respiron], states: [Kerala], metrics: [net_sales]}}
+- {text: "how has painex market share moved in gujarat", intent: trend, slots: {brands: [Painex], states: [Gujarat], metrics: [market_share]}}
+- {text: "chart it over time", intent: trend, slots: {}}
+- {text: "what are MRs reporting from Patna?", intent: search_notes, slots: {territories: [Patna]}}
+- {text: "any feedback on Cefinext from the field", intent: search_notes, slots: {competitors: [Cefinext]}}
+- {text: "field notes about stock shortage in tamil nadu", intent: search_notes, slots: {states: [Tamil Nadu]}}
+- {text: "show reports on glucoryl from karnataka last quarter", intent: search_notes, slots: {brands: [Glucoryl], states: [Karnataka], period: Q2 FY27}}
+- {text: "what's the ground feedback on dermaclear", intent: search_notes, slots: {brands: [Dermaclear]}}
+- {text: "how should we respond?", intent: recommend, slots: {}}
+- {text: "give me 3 actions for painex in haryana", intent: recommend, slots: {brands: [Painex], states: [Haryana]}}
+- {text: "what's the recovery plan", intent: recommend, slots: {}}
+- {text: "what do you suggest for cefobact in the south", intent: recommend, slots: {brands: [Cefobact], regions: [South]}}
+- {text: "what is PTS", intent: define_term, slots: {}}
+- {text: "explain what a new entrant means here", intent: define_term, slots: {}}
+- {text: "define call average", intent: define_term, slots: {}}
+- {text: "whats NLEM", intent: define_term, slots: {}}
+- {text: "meaning of days of cover", intent: define_term, slots: {}}
+- {text: "what's the difference between market effect and share effect", intent: define_term, slots: {}}
+- {text: "what can I ask?", intent: help, slots: {}}
+- {text: "which regions are in your data", intent: help, slots: {}}
+- {text: "how do I use you", intent: help, slots: {}}
+- {text: "hello sherlock", intent: greet, slots: {}}
+- {text: "hey, good afternoon", intent: greet, slots: {}}
+- {text: "thank you, very clear", intent: thanks, slots: {}}
+- {text: "awesome, thx a lot", intent: thanks, slots: {}}
+- {text: "ok that's it, bye", intent: goodbye, slots: {}}
+- {text: "see you next week", intent: goodbye, slots: {}}
+- {text: "what's the share price of a pharma company", intent: out_of_scope, slots: {}}
+- {text: "find a pharmacy near me", intent: out_of_scope, slots: {}}
+- {text: "what's the traffic like in Bengaluru", intent: out_of_scope, slots: {}}
+- {text: "summarise today's news", intent: out_of_scope, slots: {}}
+- {text: "how many holidays do I have left", intent: out_of_scope, slots: {}}

@@ -1,0 +1,59 @@
+# Multi-turn conversations. Each turn may check: intent, policy (substring), state slots,
+# and substrings the reply must contain. A conversation succeeds only if every turn passes.
+- name: ranking then why
+  turns:
+    - {say: "hi", intent: greet}
+    - {say: "which brands are underperforming last quarter?", intent: find_underperformers, contains: ["Under-performers"]}
+    - {say: "why?", intent: diagnose, contains: ["Most likely root cause"]}
+    - {say: "break it down by territory", intent: drill_down, contains: ["Territories with the largest shortfall"]}
+    - {say: "what should we do?", intent: recommend, contains: ["Action plan"]}
+- name: ellipsis region switch
+  turns:
+    - {say: "why is Cardivex underperforming in North in Q2 FY27", intent: diagnose, state: {brands: [Cardivex], regions: [North], period: Q2 FY27}}
+    - {say: "what about South?", intent: diagnose, policy: "follow-up", state: {brands: [Cardivex], regions: [South], period: Q2 FY27}}
+    - {say: "and Kerala?", intent: diagnose, policy: "follow-up", state: {states: [Kerala], regions: [South]}}
+- name: brand switch keeps geography
+  turns:
+    - {say: "Glucoryl sales in Rajasthan in Q1 FY27", intent: metric_lookup, state: {brands: [Glucoryl], states: [Rajasthan]}}
+    - {say: "and Painex?", intent: metric_lookup, policy: "follow-up", state: {brands: [Painex], states: [Rajasthan], period: Q1 FY27}}
+- name: clarification resumes pending intent
+  turns:
+    - {say: "diagnose", intent: diagnose, contains: ["Which brand"]}
+    - {say: "Respiron in East", intent: diagnose, policy: "resume pending", state: {brands: [Respiron], regions: [East]}}
+- name: brand only picks the weakest region
+  turns:
+    - {say: "why is Neurovita underperforming?", intent: diagnose, contains: ["No region given"]}
+- name: region only picks the weakest brand
+  turns:
+    - {say: "why is the West underperforming this quarter?", intent: diagnose, contains: ["No brand given"]}
+- name: metric then trend then compare
+  turns:
+    - {say: "Respiron market share in Kerala", intent: metric_lookup, contains: ["market share"]}
+    - {say: "show the monthly trend", intent: trend, state: {brands: [Respiron], states: [Kerala]}}
+    - {say: "compare regions", intent: compare, contains: ["by region"]}
+- name: typos and shorthand
+  turns:
+    - {say: "y is glucoril undrperforming in rajastan in q1", intent: diagnose, state: {brands: [Glucoryl], states: [Rajasthan], period: Q1 FY27}}
+- name: hinglish
+  turns:
+    - {say: "Cardivex North mein kyun gir raha hai?", intent: diagnose, state: {brands: [Cardivex], regions: [North]}}
+    - {say: "ab kya karna chahiye?", intent: recommend}
+- name: out of scope is not polluted into state
+  turns:
+    - {say: "why is Painex down in West", intent: diagnose, state: {brands: [Painex], regions: [West]}}
+    - {say: "what's the weather in Delhi?", intent: out_of_scope, state: {regions: [West], states: []}}
+    - {say: "why?", intent: diagnose, state: {brands: [Painex], regions: [West]}}
+- name: glossary inside a task flow
+  turns:
+    - {say: "why is Cefobact down in South", intent: diagnose}
+    - {say: "what is a share effect?", intent: define_term, contains: ["Share effect"]}
+    - {say: "drill down", intent: drill_down, state: {brands: [Cefobact]}}
+- name: field reports after diagnosis use its context
+  turns:
+    - {say: "why is Gastrazole underperforming in South", intent: diagnose}
+    - {say: "any field reports?", intent: search_notes, contains: ["Field reports"]}
+- name: help and goodbye
+  turns:
+    - {say: "what can you do?", intent: help, contains: ["Things you can ask"]}
+    - {say: "thanks!", intent: thanks}
+    - {say: "bye", intent: goodbye}
