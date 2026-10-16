@@ -2,7 +2,7 @@
 
 ## Resume bullets (pick 3–4)
 
-**Sherlock Rx: conversational root-cause analysis for pharma brands** · Python, NLP, DuckDB, FastAPI · [github.com/akshitsubudhi/sherlock-rx](https://github.com/akshitsubudhi/sherlock-rx)
+**Sherlock Rx: conversational root-cause analysis for pharma brands** · Python, NLP, DuckDB, FastAPI · [github.com/akshitsubudhi/Sherlock-Rx](https://github.com/akshitsubudhi/Sherlock-Rx)
 
 - Built an NLP chatbot that diagnoses why pharma brands under-perform by region. It scores
   **98.8% top-1 root-cause accuracy** on 160 planted scenarios (6 cause types, 5 seeds) with
