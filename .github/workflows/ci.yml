@@ -2,10 +2,14 @@ name: ci
 on: [push, pull_request]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # Pinned rather than ubuntu-latest, so the runner image changes only when we choose.
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          # No lock file in this repo; key the dependency cache on pyproject.toml.
+          cache-dependency-glob: pyproject.toml
       - run: uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -e ".[llm,dev]"
       - name: Lint and type-check
         run: .venv/bin/ruff check src tests && .venv/bin/mypy
@@ -13,5 +17,5 @@ jobs:
         run: .venv/bin/sherlock generate && .venv/bin/sherlock train
       - name: Tests and acceptance gates (RCA >= 90% top-1, NLU >= 90%, dialogue >= 90%)
         run: .venv/bin/pytest -o addopts="" -q
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with: {name: reports, path: reports/}
